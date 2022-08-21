@@ -4,24 +4,14 @@ onready var playerPath = preload("res://Player.tscn")
 onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 onready var hitbox: Area2D = get_node("Node2D/Sprite/Hitbox")
 const M4A1_bulletPath = preload("res://Bullet.tscn")
-# true/false  on the ground
 export(bool) var on_floor: bool = true
-
 var parent_velocity = Vector2()
 var velocity = Vector2()
-
 var player_in_range : bool
 var player_picked_up : bool
 var hasWeapon : bool = false
-
-var ammoAmount: int
-var ammoMagazineAmount: int
-var bulletSpread: Array = [0,0]
 var bullet_speed = -500
-var fire_rate: float
-var damage: float
-var freeze: float
-
+var hasEquiped: bool
 # Attachment Mods
 var hasAttachedMod1: bool
 var hasAttachedMod2: bool
@@ -42,34 +32,43 @@ var being_picked_up = false
 
 func _ready():
 	item_name = "M4"
-	
-	#hasAttachedMod1 = true
-	#hasAttachedMod2 = true
-	
+
+
 func _physics_process(_delta):
+	_guns_input()
+	_assault_Rifle_Animation()
+	toggle_lazer()
+	hasAttachedMod1 = true
+	hasAttachedMod2 = true
+	
+	if Input.is_action_just_pressed("interact"):
+		if player_picked_up == true:
+			player_picked_up = false
+		else:
+			if player_in_range == true:
+				player_picked_up = true
+				print(player_picked_up)
 	if being_picked_up == false:
 		pass
 	else:
 		PlayerInventory.add_item(item_name, 1)
 		queue_free()
-		
-		_guns_input()
-		assaultRifle_fire()
-		_assault_Rifle_Animation()
-		toggle_lazer()
 	#velocity = move_and_slide(velocity, Vector2.UP)
 func init(item):
 	if item_name == "M4":
 		pass
-
+func pick_up_item(body):
+	player = body
+	being_picked_up = true
+	
 func _guns_input():
 	look_at(get_global_mouse_position())
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_just_pressed("fire") and hasWeapon:
 		if $M4A1_Shoot_Sound.playing == false:
 			$M4A1_Shoot_Sound.play()
 			isShooting = true
 			assaultRifle_fire() # == null
-	if Input.is_action_pressed("fire"):
+	if Input.is_action_pressed("fire") and hasWeapon:
 		if $M4A1_Shoot_Sound.playing == false:
 			$M4A1_Shoot_Sound.play()
 			isShooting = true
@@ -86,10 +85,10 @@ func assaultRifle_mods():
 		$Node2D/Sprite/Mods/LazerGreen.visible = false
 #Shooting method
 func assaultRifle_fire():
-	var player = playerPath.instance()
+#	var player = playerPath.instance()
 	var bullet_instance = M4A1_bulletPath.instance()
 	# Left
-	if Global.player_direction == "0":
+	if Global.player_direction[0]:
 		bullet_speed = 500
 		print('FIRE!')
 		print(Global.player_direction)
@@ -151,40 +150,33 @@ func assaultRifle_fire():
 
 #Assault Rifle Animations
 func _assault_Rifle_Animation():
-	if parent_velocity != Vector2.ZERO:
-		animationTree.set("parameters/IdleM4A1/blend_position", parent_velocity.normalized())
-		animationState.travel("IdleM4A1")
-		if isShooting:
-			if item_name == "M4":
-				if Global.player_direction == "0":#right
-					$AnimationPlayer.play("Shooting_M4A1-right")
-				if Global.player_direction == "1":#left
-					$AnimationPlayer.play("Shooting_M4A1-left")
-				if Global.player_direction == "2":#down
-					$AnimationPlayer.play("Shooting_M4A1-down")
-				if Global.player_direction == "3":#up
-					$AnimationPlayer.play("Shooting_M4A1-up")
-				else:
-					animationTree.set("parameters/IdleM4A1/blend_position", parent_velocity.normalized())
-					animationState.travel("IdleM4A1")
+		if parent_velocity != Vector2.ZERO:
+			animationTree.set("parameters/IdleM4A1/blend_position", parent_velocity.normalized())
+			animationState.travel("IdleM4A1")
+			if isShooting:
+				if item_name == "M4":
+					if Global.player_direction == "0":#right
+						$AnimationPlayer.play("Shooting_M4A1-right")
+					if Global.player_direction == "1":#left
+						$AnimationPlayer.play("Shooting_M4A1-left")
+					if Global.player_direction == "2":#down
+						$AnimationPlayer.play("Shooting_M4A1-down")
+					if Global.player_direction == "3":#up
+						$AnimationPlayer.play("Shooting_M4A1-up")
+					else:
+						animationTree.set("parameters/IdleM4A1/blend_position", parent_velocity.normalized())
+						animationState.travel("IdleM4A1")
 # Toggle use of the laser sight
 func toggle_lazer():
-	
-	#var player = playerPath.instance()
-	var lazer_attachment = $Node2D/Sprite/Mods/LazerBeam# this one doesnt spamm cannot fine lazer beam
-	#var lazer_attachment = get_node("Position2D/Weapons/M4A1/LazerBeam")#Old Code
+	var lazer_attachment = $Node2D/Sprite/Mods/LazerBeam
 	if Input.is_action_just_pressed("Lazer"):
-			#if hasWeapon:
-			print("hasWeapon")
-			isLazer = !isLazer
-			if isLazer:
-				lazer_attachment.visible = true
-				#isLazer = true
-				print('lazer true')
-			else:
-				lazer_attachment.visible = false
-				#isLazer = false
-				print('lazer false')
-func pick_up_item(body):
-	player = body
-	being_picked_up = true
+		print("hasWeapon")
+		isLazer = !isLazer
+		if isLazer:
+			lazer_attachment.visible = true
+			print('lazer true')
+		else:
+			lazer_attachment.visible = false
+			#isLazer = false
+			print('lazer false')
+

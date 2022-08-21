@@ -1,9 +1,5 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=32 format=2]
 
-[ext_resource path="res://9mmAmmunition.tscn" type="PackedScene" id=1]
-[ext_resource path="res://WarningFence.tscn" type="PackedScene" id=2]
-[ext_resource path="res://WireFence.tscn" type="PackedScene" id=3]
-[ext_resource path="res://RockGrinder.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Tiles/wall1-left.jpg" type="Texture" id=6]
 [ext_resource path="res://Assets/Tiles/wall1-right.jpg" type="Texture" id=7]
@@ -12,46 +8,23 @@
 [ext_resource path="res://Assets/Tiles/wall1-down.jpg" type="Texture" id=10]
 [ext_resource path="res://Assets/Tiles/concreteTile.jpg" type="Texture" id=11]
 [ext_resource path="res://Assets/Tiles/concrete1.jpg" type="Texture" id=12]
-[ext_resource path="res://Boulder.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Assets/Tools/C4.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Tiles/concrete2.jpg" type="Texture" id=15]
-[ext_resource path="res://MineLift.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Barrel.tscn" type="PackedScene" id=17]
-[ext_resource path="res://ItemDrop.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Assets/Tiles/foreground2.jpg" type="Texture" id=19]
 [ext_resource path="res://Assets/Tiles/foreground1.jpg" type="Texture" id=20]
-[ext_resource path="res://MoldingTable.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Tiles/foreground3.jpg" type="Texture" id=22]
-[ext_resource path="res://TacticalResponseIdle.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Assets/Equipment/solarpanel.png" type="Texture" id=24]
-[ext_resource path="res://Box.tscn" type="PackedScene" id=25]
 [ext_resource path="res://MarginContainer.gd" type="Script" id=26]
-[ext_resource path="res://Entrance.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Hotbar.tscn" type="PackedScene" id=28]
-[ext_resource path="res://CDC_HAZMAT.tscn" type="PackedScene" id=29]
 [ext_resource path="res://UserInterface.gd" type="Script" id=30]
-[ext_resource path="res://Bobcat.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Inventory.tscn" type="PackedScene" id=32]
 [ext_resource path="res://Drill.tscn" type="PackedScene" id=33]
-[ext_resource path="res://Tac1.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Assets/Tiles/minerocks.jpg" type="Texture" id=35]
 [ext_resource path="res://Assets/Tiles/minetile4.png" type="Texture" id=36]
 [ext_resource path="res://Assets/Tiles/minetile2.png" type="Texture" id=37]
 [ext_resource path="res://Assets/Tiles/minetile1.png" type="Texture" id=38]
 [ext_resource path="res://Assets/Tiles/minetile3.png" type="Texture" id=39]
 [ext_resource path="res://Assets/Tiles/minetile5.png" type="Texture" id=40]
-[ext_resource path="res://Assets/Lights/skone_lighing.png" type="Texture" id=41]
-[ext_resource path="res://Assets/Lights/skone.png" type="Texture" id=42]
 [ext_resource path="res://Status.tscn" type="PackedScene" id=43]
-[ext_resource path="res://BlastFurnaceFountry.tscn" type="PackedScene" id=44]
-[ext_resource path="res://GantryCrane.tscn" type="PackedScene" id=45]
-[ext_resource path="res://Pillar.tscn" type="PackedScene" id=46]
-[ext_resource path="res://C4small.tscn" type="PackedScene" id=47]
-[ext_resource path="res://C4Large.tscn" type="PackedScene" id=48]
-[ext_resource path="res://TacticalResponseGasMaskIdle.tscn" type="PackedScene" id=49]
-[ext_resource path="res://Trm17.tscn" type="PackedScene" id=50]
-[ext_resource path="res://MineRocks.tscn" type="PackedScene" id=52]
-[ext_resource path="res://SugarCaneSeeds.tscn" type="PackedScene" id=54]
+[ext_resource path="res://M4.tscn" type="PackedScene" id=51]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 128, 0, 128 )
@@ -346,15 +319,6 @@ script = SubResource( 6 )
 
 [node name="YSort" type="YSort" parent="World"]
 
-[node name="OverlayEffects" type="CanvasLayer" parent="World/YSort"]
-
-[node name="ColorRect" type="ColorRect" parent="World/YSort/OverlayEffects"]
-visible = false
-margin_right = 1920.0
-margin_bottom = 1080.0
-rect_min_size = Vector2( 500, 500 )
-color = Color( 0, 0, 0, 0.705882 )
-
 [node name="Character" type="YSort" parent="World/YSort"]
 
 [node name="Player" parent="World/YSort/Character" instance=ExtResource( 5 )]
@@ -376,278 +340,15 @@ z_index = 3
 [node name="Status" parent="World/YSort/Character/UserInterface" instance=ExtResource( 43 )]
 visible = false
 
-[node name="Npcs" type="YSort" parent="World/YSort"]
-z_index = 1
-
-[node name="TacticalResponseIdle" parent="World/YSort/Npcs" instance=ExtResource( 23 )]
-position = Vector2( 224, -113 )
-z_index = 2
-
-[node name="CDC_HAZMAT" parent="World/YSort/Npcs" instance=ExtResource( 29 )]
-position = Vector2( 140, -151 )
-z_index = 2
-
-[node name="TacticalResponseGasMaskIdle" parent="World/YSort/Npcs" instance=ExtResource( 49 )]
-position = Vector2( 480, -115 )
-z_index = 2
-
-[node name="Fences" type="YSort" parent="World/YSort"]
-
-[node name="Warning-Fence4" parent="World/YSort/Fences" instance=ExtResource( 2 )]
-position = Vector2( 513, -151 )
-z_index = 2
-
-[node name="Warning-Fence2" parent="World/YSort/Fences" instance=ExtResource( 2 )]
-position = Vector2( 569, 416 )
-z_index = 2
-
-[node name="Warning-Fence" parent="World/YSort/Fences" instance=ExtResource( 2 )]
-position = Vector2( 568, 93 )
-z_index = 2
-
-[node name="WireFence" parent="World/YSort/Fences" instance=ExtResource( 3 )]
-position = Vector2( 791, 92 )
-z_index = 2
-
-[node name="WireFence2" parent="World/YSort/Fences" instance=ExtResource( 3 )]
-position = Vector2( 127, -152 )
-z_index = 2
-
-[node name="WireFence3" parent="World/YSort/Fences" instance=ExtResource( 3 )]
-position = Vector2( 641, -151 )
-z_index = 2
-
-[node name="Warning-Fence3" parent="World/YSort/Fences" instance=ExtResource( 2 )]
-position = Vector2( 255, -152 )
-z_index = 2
-
-[node name="Barrels" type="YSort" parent="World/YSort"]
-
-[node name="Barrel" parent="World/YSort/Barrels" instance=ExtResource( 17 )]
-position = Vector2( -576, 430 )
-z_index = 2
-
-[node name="Barrel2" parent="World/YSort/Barrels" instance=ExtResource( 17 )]
-position = Vector2( 441, 540 )
-z_index = 2
-
-[node name="Barrel3" parent="World/YSort/Barrels" instance=ExtResource( 17 )]
-position = Vector2( 489, 539 )
-z_index = 2
-
-[node name="Barrel4" parent="World/YSort/Barrels" instance=ExtResource( 17 )]
-position = Vector2( -575, 453 )
-z_index = 2
-
 [node name="Tools" type="YSort" parent="World/YSort"]
 
-[node name="Machines" type="YSort" parent="World/YSort"]
-
-[node name="RockGrinder" parent="World/YSort/Machines" instance=ExtResource( 4 )]
-position = Vector2( 691, 261 )
-z_index = 1
-
-[node name="MineLift" parent="World/YSort/Machines" instance=ExtResource( 16 )]
-position = Vector2( 117, -229 )
-
-[node name="BlastFurnaceFountry" parent="World/YSort/Machines" instance=ExtResource( 44 )]
-position = Vector2( -374, -5 )
-z_index = 1
-
-[node name="GantryCrane" parent="World/YSort/Machines" instance=ExtResource( 45 )]
-position = Vector2( -372, -145 )
-z_index = 2
-
-[node name="MoldingTable" parent="World/YSort/Machines" instance=ExtResource( 21 )]
-position = Vector2( -565, 250 )
-scale = Vector2( 0.6, 0.8 )
+[node name="MiningDrill" parent="World/YSort/Tools" instance=ExtResource( 33 )]
+position = Vector2( -228, 134 )
 
 [node name="Weapons" type="YSort" parent="World/YSort"]
 
-[node name="C4small" parent="World/YSort/Weapons" instance=ExtResource( 47 )]
-position = Vector2( -50, -95 )
-
-[node name="C4Large" parent="World/YSort/Weapons" instance=ExtResource( 48 )]
-position = Vector2( -11, -95 )
-
-[node name="Enemies" type="Node2D" parent="World/YSort"]
-
-[node name="Environment" type="Node2D" parent="World/YSort"]
-
-[node name="Boulder" parent="World/YSort/Environment" instance=ExtResource( 13 )]
-position = Vector2( -557, 572 )
-
-[node name="Boulder2" parent="World/YSort/Environment" instance=ExtResource( 13 )]
-position = Vector2( -275, 560 )
-
-[node name="C4" type="Sprite" parent="World/YSort/Environment"]
-position = Vector2( 34, -92 )
-texture = ExtResource( 14 )
-
-[node name="ItemDrop" parent="World/YSort" instance=ExtResource( 18 )]
-position = Vector2( -107, 522 )
-scale = Vector2( 0.4, 0.4 )
-
-[node name="Box" parent="World/YSort" instance=ExtResource( 25 )]
-position = Vector2( 806, 352 )
-
-[node name="SolarPanel" type="Node2D" parent="World/YSort"]
-
-[node name="Sprite" type="Sprite" parent="World/YSort/SolarPanel"]
-position = Vector2( -114, -149 )
-scale = Vector2( 0.5, 0.5 )
-z_index = 2
-texture = ExtResource( 24 )
-
-[node name="Bobcat" parent="World/YSort" instance=ExtResource( 31 )]
-position = Vector2( 112, 491 )
-z_index = 3
-
-[node name="Tac1" parent="World/YSort" instance=ExtResource( 34 )]
-position = Vector2( 228, 393 )
-
-[node name="9mmAmmunition" parent="World/YSort" instance=ExtResource( 1 )]
-position = Vector2( 136, 333 )
-
-[node name="Lights" type="Node2D" parent="World/YSort"]
-
-[node name="Skone" type="Node2D" parent="World/YSort/Lights"]
-position = Vector2( 17, -181 )
-
-[node name="Sprite" type="Sprite" parent="World/YSort/Lights/Skone"]
-texture = ExtResource( 42 )
-
-[node name="Light2D" type="Light2D" parent="World/YSort/Lights/Skone/Sprite"]
-texture = ExtResource( 41 )
-texture_scale = 3.38
-color = Color( 0.796078, 0.643137, 0.494118, 1 )
-energy = 1.58
-shadow_enabled = true
-shadow_color = Color( 0, 0.298039, 1, 0 )
-
-[node name="Skone2" type="Node2D" parent="World/YSort/Lights"]
-position = Vector2( -413, 606 )
-
-[node name="Sprite" type="Sprite" parent="World/YSort/Lights/Skone2"]
-texture = ExtResource( 42 )
-
-[node name="Light2D" type="Light2D" parent="World/YSort/Lights/Skone2/Sprite"]
-visible = false
-texture = ExtResource( 41 )
-texture_scale = 3.38
-color = Color( 0.796078, 0.643137, 0.494118, 1 )
-energy = 2.0
-shadow_enabled = true
-shadow_color = Color( 0, 0.298039, 1, 0 )
-
-[node name="Skone3" type="Node2D" parent="World/YSort/Lights"]
-position = Vector2( 873, 482 )
-
-[node name="Sprite" type="Sprite" parent="World/YSort/Lights/Skone3"]
-texture = ExtResource( 42 )
-
-[node name="Light2D" type="Light2D" parent="World/YSort/Lights/Skone3/Sprite"]
-visible = false
-texture = ExtResource( 41 )
-texture_scale = 3.38
-color = Color( 0.796078, 0.643137, 0.494118, 1 )
-energy = 1.8
-shadow_enabled = true
-shadow_color = Color( 0, 0.298039, 1, 0 )
-
-[node name="Skone4" type="Node2D" parent="World/YSort/Lights"]
-position = Vector2( 415, 190 )
-z_index = 3
-
-[node name="Sprite" type="Sprite" parent="World/YSort/Lights/Skone4"]
-z_index = 4
-texture = ExtResource( 42 )
-
-[node name="Light2D" type="Light2D" parent="World/YSort/Lights/Skone4/Sprite"]
-visible = false
-z_index = 2
-texture = ExtResource( 41 )
-texture_scale = 3.38
-color = Color( 0.796078, 0.643137, 0.494118, 1 )
-energy = 1.58
-shadow_enabled = true
-shadow_color = Color( 0, 0.298039, 1, 0 )
-
-[node name="Skone5" type="Node2D" parent="World/YSort/Lights"]
-position = Vector2( -650, 210 )
-z_index = 3
-
-[node name="Sprite" type="Sprite" parent="World/YSort/Lights/Skone5"]
-texture = ExtResource( 42 )
-
-[node name="Light2D" type="Light2D" parent="World/YSort/Lights/Skone5/Sprite"]
-visible = false
-z_index = 2
-texture = ExtResource( 41 )
-texture_scale = 3.38
-color = Color( 0.796078, 0.643137, 0.494118, 1 )
-energy = 1.58
-shadow_enabled = true
-shadow_color = Color( 0, 0.298039, 1, 0 )
-
-[node name="Skone6" type="Node2D" parent="World/YSort/Lights"]
-position = Vector2( 750, -181 )
-
-[node name="Sprite" type="Sprite" parent="World/YSort/Lights/Skone6"]
-texture = ExtResource( 42 )
-
-[node name="Light2D" type="Light2D" parent="World/YSort/Lights/Skone6/Sprite"]
-visible = false
-texture = ExtResource( 41 )
-texture_scale = 3.38
-color = Color( 0.796078, 0.643137, 0.494118, 1 )
-energy = 1.58
-shadow_enabled = true
-shadow_color = Color( 0, 0.298039, 1, 0 )
-
-[node name="Skone7" type="Node2D" parent="World/YSort/Lights"]
-position = Vector2( 0, 190 )
-z_index = 3
-
-[node name="Sprite" type="Sprite" parent="World/YSort/Lights/Skone7"]
-z_index = 4
-texture = ExtResource( 42 )
-
-[node name="Light2D" type="Light2D" parent="World/YSort/Lights/Skone7/Sprite"]
-visible = false
-z_index = 2
-texture = ExtResource( 41 )
-texture_scale = 3.38
-color = Color( 0.796078, 0.643137, 0.494118, 1 )
-energy = 1.58
-shadow_enabled = true
-shadow_color = Color( 0, 0.298039, 1, 0 )
-
-[node name="Pillar3" parent="World/YSort" instance=ExtResource( 46 )]
-position = Vector2( 0, 190 )
-z_index = 1
-
-[node name="Pillar2" parent="World/YSort" instance=ExtResource( 46 )]
-position = Vector2( 414, 190 )
-z_index = 1
-
-[node name="Trm17" parent="World/YSort" instance=ExtResource( 50 )]
-position = Vector2( -163, -76 )
-
-[node name="MineRocks" parent="World/YSort" instance=ExtResource( 52 )]
-position = Vector2( 429, 383 )
-
-[node name="MineRocks2" parent="World/YSort" instance=ExtResource( 52 )]
-position = Vector2( 381, 346 )
-
-[node name="MineRocks3" parent="World/YSort" instance=ExtResource( 52 )]
-position = Vector2( 395, 420 )
-
-[node name="SugarCaneSeeds" parent="World/YSort" instance=ExtResource( 54 )]
-position = Vector2( 352, 232 )
-
-[node name="MiningDrill" parent="World/YSort" instance=ExtResource( 33 )]
-position = Vector2( -228, 134 )
+[node name="M4" parent="World/YSort/Weapons" instance=ExtResource( 51 )]
+position = Vector2( -213, 309 )
 
 [node name="SystemDiagnosis" type="CanvasLayer" parent="World"]
 
@@ -671,15 +372,3 @@ margin_bottom = 14.0
 [node name="Stat2" type="Label" parent="World/SystemDiagnosis/MarginContainer/HBoxContainer/VBoxContainer"]
 margin_top = 18.0
 margin_bottom = 32.0
-
-[node name="Entrance" parent="World" instance=ExtResource( 27 )]
-position = Vector2( 540, -552 )
-next_scene_path = "res://OutsideWorld.tscn"
-player_spawn_location = Vector2( 680, -150 )
-
-[node name="Entrance2" parent="World" instance=ExtResource( 27 )]
-position = Vector2( 246, -546 )
-next_scene_path = "res://OutsideWorld.tscn"
-player_spawn_location = Vector2( 680, -150 )
-
-[editable path="World/YSort/Machines/GantryCrane"]
